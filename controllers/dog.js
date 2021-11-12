@@ -14,14 +14,15 @@ exports.dog_list = async function(req, res) {
  // VIEWS 
 // Handle a show all view 
 exports.dog_view_all_Page = async function(req, res) { 
-    try{ 
-        let dogs = await Dog.find(); 
-        res.render('dog', { title: 'Dog Search Results', results: dogs }); 
+    console.log("detail"  + req.params.id) 
+    try { 
+        result = await dog.findById( req.params.id) 
+        res.send(result) 
+    } catch (error) { 
+        res.status(500) 
+        res.send(`{"error": document for id ${req.params.id} not found`); 
     } 
-    catch(err){ 
-        res.status(500); 
-        res.send(`{"error": ${err}}`); 
-    }   
+}; 
 }; 
 // for a specific dog. 
 exports.dog_detail = function(req, res) { 
